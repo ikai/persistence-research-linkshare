@@ -1,10 +1,5 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<!-- The HTML 4.01 Transitional DOCTYPE declaration-->
-<!-- above set at the top of the file will set     -->
-<!-- the browser's rendering engine into           -->
-<!-- "Quirks Mode". Replacing this declaration     -->
-<!-- with a "Standards Mode" doctype is supported, -->
-<!-- but may lead to some differences in layout.   -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
 
 <html>
 <head>
@@ -13,8 +8,17 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script type="text/javascript">
+
     $(document).ready(function() {
+        // Fetch login window and options
+        $.get("/login", function(responseHtml) {
+            $("#session-management").html(responseHtml);    
+        });
+        
+    	
+        // Fetch links
         $.getJSON("/links", function(links) {
+            // Fetch links
             console.debug(links);
             jQuery.each(links, function() {
                 var link = this;
@@ -31,7 +35,9 @@
 
 <body>
 <h1>Welcome to LinkShare</h1>
-
+<div id="session-management">
+    
+</div>
 <form action="/submit_link" method="POST">
 <p>URL: <input type="text" name="url" /></p>
 <input type="submit"></form>

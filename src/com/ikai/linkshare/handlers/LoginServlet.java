@@ -44,14 +44,13 @@ public class LoginServlet extends HttpServlet {
 		if (user != null) {
 			out.println("Hello <i>" + user.getNickname() + "</i>!");
 			out.println("[<a href=\""
-					+ userService.createLogoutURL(req.getRequestURI())
+					+ userService.createLogoutURL("/")
 					+ "\">sign out</a>]");
 		} else {
 			out.println("Hello world! Sign in at: ");
 			for (String providerName : openIdProviders.keySet()) {
 				String providerUrl = openIdProviders.get(providerName);
-				String loginUrl = userService.createLoginURL(req
-						.getRequestURI(), null, providerUrl, attributes);
+				String loginUrl = userService.createLoginURL("/", null, providerUrl, attributes);
 				out.println("[<a href=\"" + loginUrl + "\">" + providerName
 						+ "</a>] ");
 			}

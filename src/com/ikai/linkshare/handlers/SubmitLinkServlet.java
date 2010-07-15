@@ -30,7 +30,7 @@ public class SubmitLinkServlet extends HttpServlet {
 		if(user == null) {
 			// TODO: Stash the URL into the session
 			// For the time being let's just not optimize this case
-			resp.sendRedirect("/login");
+			resp.sendRedirect("/");
 		} else {
 			
 			Entity link =  new Entity("Link");
