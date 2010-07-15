@@ -4,11 +4,14 @@ import java.util.Date;
 
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.users.User;
 
 public class Link {
 
 	private Key key;
+	
+	private String encodedKey;
 	
 	private User user;
 	
@@ -30,6 +33,7 @@ public class Link {
 		}
 		Link link = new Link();
 		link.setKey(entity.getKey());
+		link.setEncodedKey(KeyFactory.keyToString(entity.getKey()));
 		link.setUrl((String) entity.getProperty("url"));
 		link.setUser((User) entity.getProperty("user"));
 		link.setTitle((String) entity.getProperty("title"));
@@ -47,15 +51,20 @@ public class Link {
 	public void setKey(Key key) {
 		this.key = key;
 	}
+	
+
+	public String getEncodedKey() {
+		return encodedKey;
+	}
+
+	public void setEncodedKey(String encodedKey) {
+		this.encodedKey = encodedKey;
+	}
 
 	public User getUser() {
 		return user;
 	}
 	
-//	public String getUsername() {
-//		
-//	}
-
 	public void setUser(User user) {
 		this.user = user;
 	}

@@ -3,6 +3,7 @@ package com.ikai.linkshare.handlers;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +16,9 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gson.Gson;
 import com.ikai.linkshare.domain.models.Link;
 
@@ -46,16 +50,19 @@ public class GetLinksServlet extends HttpServlet {
 		ArrayList<Link> links = new ArrayList<Link>();
 
 		for (Entity entity : results) {
-			links.add(Link.fromEntity(entity));
+			Link link = Link.fromEntity(entity);			
+			links.add(link);
 		}
-
-		// Turn them into JSON
-		Gson gson = new Gson();
-		String response = gson.toJson(links);
-
-		PrintWriter out = resp.getWriter();
-		out.println(response);
-
+		
+		HashMap<String, Object> response = new HashMap<String, Object>();
+		response.put("links", links);
+		
+		UserService userService = UserServiceFactory.getUserService();
+		User user = userService.getCurrentUser(); 
+		response.put("currentUser", user);
+		
+		Gson gson = new Gson();		
+		resp.getWriter().println(gson.toJson(response));
 	}
 
 }

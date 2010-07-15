@@ -71,6 +71,7 @@ public class EditLinkServlet extends HttpServlet {
 				entity.setProperty("title", title);
 				entity.setProperty("summary", summary);
 				entity.setProperty("submittedAt", new Date());
+				entity.setProperty("score", 1);
 				datastore.put(entity);
 				resp.sendRedirect("/?success=" + URLEncoder.encode("Successfully submitted link", "UTF-8"));
 			} catch (EntityNotFoundException e) {

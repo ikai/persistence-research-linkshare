@@ -17,7 +17,9 @@
         
     	
         // Fetch links
-        $.getJSON("/links", function(links) {
+        $.getJSON("/links", function(response) {
+            var links = response.links;
+            var currentUser = response.currentUser;
             // Fetch links
             console.debug(links);
             jQuery.each(links, function() {
@@ -28,6 +30,11 @@
                 if(link.summary) {
                 	linkHtml = linkHtml + "<p>" + link.summary + "</p>";
                 }
+                
+                if(link.user.email == currentUser.email) {
+                    linkHtml = linkHtml + "<a href='/edit?key=" + link.encodedKey + "'>Edit</a>";
+                }
+                
                 linkHtml = linkHtml + " <span class='link-submitter'>Submited by " + link.user.email + "</span></li>";
                 $("ul#links").append(linkHtml);
             });
