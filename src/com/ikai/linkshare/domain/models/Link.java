@@ -51,6 +51,10 @@ public class Link {
 	public User getUser() {
 		return user;
 	}
+	
+//	public String getUsername() {
+//		
+//	}
 
 	public void setUser(User user) {
 		this.user = user;

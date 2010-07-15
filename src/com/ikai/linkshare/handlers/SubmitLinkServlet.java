@@ -27,7 +27,7 @@ public class SubmitLinkServlet extends HttpServlet {
 		User user = userService.getCurrentUser(); 
 		
 		// User is not logged in, let's ask the User to log in
-		if(user != null) {
+		if(user == null) {
 			// TODO: Stash the URL into the session
 			// For the time being let's just not optimize this case
 			resp.sendRedirect("/login");
@@ -35,7 +35,7 @@ public class SubmitLinkServlet extends HttpServlet {
 			
 			Entity link =  new Entity("Link");
 			link.setProperty("url", url);
-			link.setProperty("submitter", user);
+			link.setProperty("user", user);
 			link.setProperty("score", 1);
 			
 			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
