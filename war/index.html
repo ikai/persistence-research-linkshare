@@ -21,10 +21,15 @@
             // Fetch links
             console.debug(links);
             jQuery.each(links, function() {
+
+                // Yes, I'm aware we should be using a template or cloning approach, but I have no time
                 var link = this;
-                var link = "<li><h3>" + link.score + "</h3> " + link.url + 
-                   " <span class='link-submitter'>Submited by " + link.user.email + "</span></li>";
-                $("ul#links").append(link);
+                var linkHtml = "<li><h3>" + link.score + "</h3> " + link.url;
+                if(link.summary) {
+                	linkHtml = linkHtml + "<p>" + link.summary + "</p>";
+                }
+                linkHtml = linkHtml + " <span class='link-submitter'>Submited by " + link.user.email + "</span></li>";
+                $("ul#links").append(linkHtml);
             });
             $("#loading-image").hide();
         });

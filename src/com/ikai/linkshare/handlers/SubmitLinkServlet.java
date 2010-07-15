@@ -32,8 +32,13 @@ public class SubmitLinkServlet extends HttpServlet {
 			// For the time being let's just not optimize this case
 			resp.sendRedirect("/");
 		} else {
+			// TODO: Validate the link, prevent script injection, etc
 			
-			Entity link =  new Entity("Link");
+			// We're setting the primary key to the userId + the URL to prevent
+			// a duplicate submission (naive)
+			// This also lets us (naively) prevent someone from stomping another
+			// user's changes
+			Entity link =  new Entity("Link", user.getUserId() + url);
 			link.setProperty("url", url);
 			link.setProperty("user", user);
 			link.setProperty("score", 1);
