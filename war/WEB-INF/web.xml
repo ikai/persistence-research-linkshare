@@ -22,6 +22,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
        <servlet-name>GetLinks</servlet-name>
        <servlet-class>com.ikai.linkshare.handlers.GetLinksServlet</servlet-class>
     </servlet>
+    <servlet>
+       <servlet-name>AddVote</servlet-name>
+       <servlet-class>com.ikai.linkshare.handlers.AddVoteServlet</servlet-class>
+    </servlet>
 
 	<servlet-mapping>
 		<servlet-name>Login</servlet-name>
@@ -41,6 +45,11 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     <servlet-mapping>
        <servlet-name>GetLinks</servlet-name>
        <url-pattern>/links</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+       <servlet-name>AddVote</servlet-name>
+       <url-pattern>/vote</url-pattern>
     </servlet-mapping>
 
 

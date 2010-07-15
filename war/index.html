@@ -26,17 +26,32 @@
 
                 // Yes, I'm aware we should be using a template or cloning approach, but I have no time
                 var link = this;
-                var linkHtml = "<li><h3>" + link.score + "</h3> " + link.url;
+                var linkHtml = "<li class='link-item'><h3 class='link-score'>" + link.score + "</h3> " + link.url;
                 if(link.summary) {
                 	linkHtml = linkHtml + "<p>" + link.summary + "</p>";
                 }
-                
-                if(link.user.email == currentUser.email) {
-                    linkHtml = linkHtml + "<a href='/edit?key=" + link.encodedKey + "'>Edit</a>";
+
+                if(currentUser) {
+                    linkHtml = linkHtml + "<a class='vote' href='/vote?key=" + link.encodedKey + "'>Vote</a> ";
+                    
+	                if(link.user.email == currentUser.email) {
+	                    linkHtml = linkHtml + "<a href='/edit?key=" + link.encodedKey + "'>Edit</a>";
+	                }
+	                
                 }
                 
                 linkHtml = linkHtml + " <span class='link-submitter'>Submited by " + link.user.email + "</span></li>";
                 $("ul#links").append(linkHtml);
+            });
+
+            $("a.vote").click(function() {
+                var uri = $(this).attr("href");
+                var element = this;
+                var scoreElement = $(this).parents("li.link-item").children('h3.link-score');
+                $.post(uri, {}, function(data) {
+                    scoreElement.html(data.score);
+                }, 'json');
+                return false;
             });
             $("#loading-image").hide();
         });
