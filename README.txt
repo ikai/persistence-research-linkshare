@@ -1,0 +1,1 @@
+Project for doing research on alternative persistence frameworks for App Engine.
