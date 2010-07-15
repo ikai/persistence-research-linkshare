@@ -18,11 +18,11 @@ public class Link {
 	
 	private String summary;
 	
-	private Integer score;
+	private Long score;
 	
 	private Date submittedAt;
 	
-	private Integer numComments;
+	private Long numComments;
 	
 	public static Link fromEntity(Entity entity){
 		if(!entity.getKind().equals(Link.class.getSimpleName())) {
@@ -34,9 +34,9 @@ public class Link {
 		link.setUser((User) entity.getProperty("user"));
 		link.setTitle((String) entity.getProperty("title"));
 		link.setSummary((String) entity.getProperty("summary"));
-		link.setScore((Integer) entity.getProperty("score"));		
+		link.setScore((Long) entity.getProperty("score"));		
 		link.setSubmittedAt((Date) entity.getProperty("submittedAt"));
-		link.setNumComments((Integer) entity.getProperty("numComments"));
+		link.setNumComments((Long) entity.getProperty("numComments"));
 		return link;
 	}
 
@@ -80,11 +80,11 @@ public class Link {
 		this.summary = summary;
 	}
 
-	public Integer getScore() {
+	public Long getScore() {
 		return score;
 	}
 
-	public void setScore(Integer score) {
+	public void setScore(Long score) {
 		this.score = score;
 	}
 
@@ -96,11 +96,11 @@ public class Link {
 		this.submittedAt = submittedAt;
 	}
 
-	public Integer getNumComments() {
+	public Long getNumComments() {
 		return numComments;
 	}
 
-	public void setNumComments(Integer numComments) {
+	public void setNumComments(Long numComments) {
 		this.numComments = numComments;
 	}
 		

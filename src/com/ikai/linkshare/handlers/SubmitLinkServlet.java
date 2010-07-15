@@ -36,6 +36,7 @@ public class SubmitLinkServlet extends HttpServlet {
 			Entity link =  new Entity("Link");
 			link.setProperty("url", url);
 			link.setProperty("submitter", user);
+			link.setProperty("score", 1);
 			
 			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 			datastore.put(link);
